@@ -30,19 +30,17 @@ th {
     <table>
       <thead>
         <tr>
+          <th>Thumbnail</th>
           <th>Uploaded</th>
           <th>Title</th>
-          <th>Artist</th>
-          <th>Description</th>
         </tr>
       </thead>
       <tbody>
         {% for video in results %}
           <tr>
+	    <td><a href="{{url_for('video', service=video['service'], service_id=video['service_id'])}}"><img width="256" src="{{url_for('thumbnail', service=video['service'], service_id=video['service_id'])}}"></a></td>
             <td>{{video['upload_date']}}</td>
             <td><a href="{{url_for('video', service=video['service'], service_id=video['service_id'])}}">{{video['title']  |safe }}</a></td>
-            <td><a href="{{url_for('artist', service=video['service'], uploader_id=video['uploader_id'])}}">{{video['artist']}}</a></td>
-            <td style="white-space: pre-wrap;">{{video['description'] | safe }}</td>
           </tr>
         {% endfor %}
   </body>
