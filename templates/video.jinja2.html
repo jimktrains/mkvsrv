@@ -1,6 +1,7 @@
 <html>
   <head>
     <title>Video Search</title>
+    <link href="/static/vjs.zencdn.net/8.0.4/video-js.css" rel="stylesheet" />
   </head>
   <body>
     <dl>
@@ -13,6 +14,44 @@
         <dt>upload_date</dt>
         <dd>{{video['upload_date']}}</dd>
 
+    </dl>
+  <video
+    id="my-video"
+    class="video-js"
+    controls
+    preload="auto"
+    width="640"
+    height="264"
+    poster="{{url_for('thumbnail', service=video['service'], service_id=video['service_id'])}}"
+    data-setup="{}"
+  >
+    <source src="{{url_for('videofile', service=video['service'], service_id=video['service_id'])}}" type="video/mp4"/>
+
+    <track kind="chapters" src="{{url_for('chapters', service=video['service'], service_id=video['service_id'])}}" srclang="en" label="English" kind="chapters" default>
+    <p class="vjs-no-js">
+      To view this video please enable JavaScript, and consider upgrading to a
+      web browser that
+      <a href="https://videojs.com/html5-video-support/" target="_blank"
+        >supports HTML5 video</a
+      >
+    </p>
+  </video>
+
+
+    <dl>
+<dt>Tags</dt>
+<ul>
+{% for tag in tags %}
+	<li>{{tag}}</li>
+{% endfor %}
+</ul>
+<dt>Categories</dt>
+<ul>
+{% for category in categories %}
+	<li>{{category}}</li>
+{% endfor %}
+</ul>
+
         <dt>description</dt>
         <dd style="white-space: pre-wrap;">{{video['description'] | safe}}</dd>
 
@@ -22,5 +61,6 @@
         <dt>filepath</dt>
         <dd>{{video['filepath']}}</dd>
     </dl>
+    <script src="/static/vjs.zencdn.net/8.0.4/video.min.js"></script>
   </body>
 </html>

@@ -24,6 +24,13 @@ th {
   background-color: #04AA6D;
   color: white;
 }
+
+.artists {
+	width: 20%;
+	float: left;
+	display: block-inline;
+}
+
 </style>
   </head>
   <body>
@@ -35,9 +42,18 @@ th {
       </fieldset>
     </form>
     <hr>
+    <h1>Artists</h1>
+        {% for artist in artists%}
+        <span class="artist"><a href="{{url_for('artist', service=artist['service'], uploader_id=artist['uploader_id'])}}">{{artist['artist']}}</a></span>
+	{% endfor %}
+      </tbody>
+    </table>
+    <hr>
+    <h1>Videos</h1>
     <table>
       <thead>
         <tr>
+	  <th></th>
           <th>Title</th>
           <th>Artist</th>
           <th>Description</th>
@@ -46,6 +62,7 @@ th {
       <tbody>
         {% for video in results %}
           <tr>
+	    <td><a href="{{url_for('video', service=video['service'], service_id=video['service_id'])}}"><img width="256" src="{{url_for('thumbnail', service=video['service'], service_id=video['service_id'])}}"></a></td>
             <td><a href="{{url_for('video', service=video['service'], service_id=video['service_id'])}}">{{video['highlighttitle']  |safe }}</a></td>
             <td><a href="{{url_for('artist', service=video['service'], uploader_id=video['uploader_id'])}}">{{video['artist']}}</a></td>
             <td style="white-space: pre-wrap;">{{video['highlightdesc'] | safe }}</td>
