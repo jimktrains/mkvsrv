@@ -1,0 +1,55 @@
+<html>
+  <head>
+    <title>Video Search</title>
+<style>
+table {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2;}
+
+tr:hover {background-color: #ddd;}
+
+th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
+</style>
+  </head>
+  <body>
+    <form>
+      <fieldset>
+        <label for="q">Search Term:</label>
+        <input id="q" name="q" value="{{q}}">
+        <input type="submit" value="search">
+      </fieldset>
+    </form>
+    <hr>
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Artist</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for video in results %}
+          <tr>
+            <td><a href="{{url_for('video', service=video['service'], service_id=video['service_id'])}}">{{video['highlighttitle']  |safe }}</a></td>
+            <td><a href="{{url_for('artist', service=video['service'], uploader_id=video['uploader_id'])}}">{{video['artist']}}</a></td>
+            <td style="white-space: pre-wrap;">{{video['highlightdesc'] | safe }}</td>
+          </tr>
+        {% endfor %}
+  </body>
+</html>

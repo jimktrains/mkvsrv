@@ -1,0 +1,26 @@
+<html>
+  <head>
+    <title>Video Search</title>
+  </head>
+  <body>
+    <dl>
+        <dt>title</dt>
+        <dd>{{video['title']}}</dd>
+
+        <dt>artist</dt>
+        <dd><a href="{{url_for('artist', service=video['service'], uploader_id=video['uploader_id'])}}">{{video['artist']}}</a></dd>
+
+        <dt>upload_date</dt>
+        <dd>{{video['upload_date']}}</dd>
+
+        <dt>description</dt>
+        <dd style="white-space: pre-wrap;">{{video['description'] | safe}}</dd>
+
+        <dt>duration_ms</dt>
+        <dd>{{video['duration_ms']}}</dd>
+
+        <dt>filepath</dt>
+        <dd>{{video['filepath']}}</dd>
+    </dl>
+  </body>
+</html>
